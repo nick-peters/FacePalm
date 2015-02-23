@@ -10,16 +10,39 @@ $(function(){
     $('#name').text(name);
   }
 
-  function marker(lat, lng, name){
+  function marker(lat, lng, name, desc){
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, lng),
         title: name,
         // icon:
       });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: desc
+    });
+
     marker.setMap(map);
+    infowindow.open(map);
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
   }
 
-  alert('todo');
+  function details(){
+    var infowindow = new google.maps.InfoWindow({
+        content: 'Hello'
+    });
+    infowindow.open(map);
+  }
+
+
+  // alert('todo');
   PrintName('MEXI-THAI-YAKI');
+  $('#address').text('10000 Burnside St, ' + 'Zip Code');
+  alert('mark');
+  marker(45.522927, -122.673008, 'VooDoo', 'FOODMONGER');
+
+
 
 });
