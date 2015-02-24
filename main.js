@@ -11,7 +11,9 @@ var groups = [
     new Member("Fan"),
     new Member("Daniel")
     ])
-  ]
+  ];
+
+var selection = [];
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -116,10 +118,16 @@ $(function() {
 
     }
     else if ($("body").attr("id") == "formPage") {
+      for (i=0; i<groups[1].members.length; i++) {
+        $('#nameChoice').append($('<option>').text(groups[1].members[i].memberName).attr('value',groups[1].members[i].memberName.toLowerCase()));
+      }
+
 
     }
     else if ($("body").attr("id") == "resultPage") {
 
     }
+
+
 
 });
