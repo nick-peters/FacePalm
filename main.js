@@ -11,7 +11,9 @@ var groups = [
     new Member("Fan"),
     new Member("Daniel")
     ])
-  ]
+  ];
+
+var selectedGroup;
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -56,6 +58,15 @@ function readGroups() {
 
   }
 
+}
+
+function getSelectedGroup() {
+ var selectedGroup = localStorage.getItem("selectedGroup");
+ for (var i = 0; i < groups.length; i++) {
+   if (groups[i].groupName == selectedGroup) {
+     return groups[i];
+   }
+ }
 }
 
 function textSearchCallback(data, status) {
@@ -110,7 +121,18 @@ $(function() {
       })
     }
     else if ($("body").attr("id") == "formPage") {
+      selectedGroup = getSelectedGroup();
+      for (i=0; i<selectedGroup.members.length; i++) {
+        $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
+          .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
+      }
+      $('#placeVote').on('click', function() {
+        var testname = $('#nameChoice :selected').text();
+        var othertestname = $('#cuisineChoice :selected').text();
+        console.log(testname)
+        console.log(othertestname)
 
+      })
     }
     else if ($("body").attr("id") == "resultPage") {
     }
@@ -125,5 +147,7 @@ $(function() {
         dropDown.appendChild(el);
       }
     }
+
+
 
 });
