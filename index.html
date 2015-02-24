@@ -10,12 +10,10 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="frontpage.css">
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
-  </head>
 
-<body>
-    <selection class="col-xs-12 col-md-12">
-      <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
+  </head>
+  <body>
+    <selection>
       <nav class="navbar navbar-default navbar-fixed-top">
         <ul class="nav navbar-nav ">
           <li ><a href="#">Home</a></li>
@@ -26,30 +24,18 @@
       </nav>
     </selection>
 
-    <selection id="group" class="col-xs-12 col-md-12">
-      <form class="navbar-form navbar-left">
-      <h1 id="groupChoice" class="navbar-text">Pick a Group
-      <p></p>
-      <select>
-        <option value="FacePalm">FacePalm</option>
-        <option value="BuckSnort">BuckSnort</option>
-      </select>
-      <p></p>
-      <button type="submit" class="btn btn-default navbar-btn">Submit</button>
-      </h1>
-      <p></p>
-       <div id="googleMap" style="width:500px;height:380px;"></div>
-      </form>
+    <div id="container">
+    <p>here are the groups</p>
+    <select id="memberNames">
+    </div>
 
-    </selection>
-
-    <!-- <selection id="googleMap" style="height:500px"></selection> -->
 
     <selection class="col-xs-12 col-md-12">
       <nav class="navbar navbar-default navbar-fixed-bottom">
-      <footer>Copyright © 2015 FacePalm, LLC. All Rights Reserved.</footer>
+      <footer>Copyright © 2015 FacePalm. All Rights Reserved.</footer>
       </nav>
     </selection>
-    <script src="frontpage.js"></script>
+
+    <script src="feb24.js"></script>
     </body>
     </html>
