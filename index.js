@@ -1,27 +1,4 @@
-var groups = [
-  {
-    groupName:"facepalm",
-    members:[
-      {memberName:"nick"},
-      {memberName:"naveed"},
-      {memberName:"lamson"},
-      {memberName:"matt"}
-    ]
-  },
-
-
-  {
-    groupName:"bucksnort",
-    members:[
-      {memberName:"Ron"},
-      {memberName:"Fan"},
-      {memberName:"daniel"},
-      {memberName:"dane"}
-    ]
-  }
-]
-
-
+var groups = readGroups();
 
 var dropDown = document.getElementById("memberNames");
   for (var i = 0; i < groups.length; i++){
