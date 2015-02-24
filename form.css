@@ -1,0 +1,21 @@
+#container{
+  margin: 80px 50px 0 50px;
+}
+
+form {
+  border: 2px solid lightgray;
+  margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.row {
+  margin: 10px 5px;
+}
+
+#userLocation {
+  width: 50%;
+  color: lightgray;
+}

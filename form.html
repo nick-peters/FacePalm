@@ -17,90 +17,107 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!-- Project CSS Stylesheet -->
-    <link href="#" rel="stylesheet">
-
+    <link href="form.css" rel="stylesheet">
   </head>
   <body>
-<div class="row">
-  <div class="col-md-9">
-      <form>
-
-<!-- Insert Name Dropdown -->
-<div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" role="button">What is your name?
-            <span class="caret"></span>
-          </button>
-        <ul class="dropdown-menu select" role="menu" id="cuisineChoice">
-          <li role="presentation"><a role="menuitem" value = "Mexican">Mexican</a></li>
-          <li role="presentation"><a role="menuitem" value = "Thai">Thai</a></li>
-          <li role="presentation"><a role="menuitem" value = "Pub">Pub</a></li>
-          <li role="presentation"><a role="menuitem" value = "Chinese">Chinese</a></li>
-
+    <selection class="col-xs-12 col-md-12">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav navbar-nav ">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
-      </div>
-
-
-
-        <label id="subheader" class="panel-heading">Select Cuisine</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" role="button">What sounds good?
-            <span class="caret"></span>
-          </button>
-        <ul class="dropdown-menu select" role="menu" id="cuisineChoice">
-          <li role="presentation"><a role="menuitem" value = "Mexican">Mexican</a></li>
-          <li role="presentation"><a role="menuitem" value = "Thai">Thai</a></li>
-          <li role="presentation"><a role="menuitem" value = "Pub">Pub</a></li>
-          <li role="presentation"><a role="menuitem" value = "Chinese">Chinese</a></li>
-          <li role="presentation"><a role="menuitem" value = "Pizza">Pizza</a></li>
-          <li role="presentation"><a role="menuitem" value = "Vietnamese">Vietnamese</a></li>
-          <li role="presentation"><a role="menuitem" value = "Japanese">Japanese</a></li>
-          <li role="presentation"><a role="menuitem" value = "Indian">Indian</a></li>
-          <li role="presentation"><a role="menuitem" value = "Burgers">Burgers</a></li>
-          <li role="presentation"><a role="menuitem" value = "Seafood">Seafood</a></li>
-        </ul>
-      </div>
+        <header>Lunch Bag Ninja</header>
+      </nav>
+    </selection>
+    <div id="container">
       <div class="row">
-        <div class="col-md-6">
-          <label>Where are you now?</label>
-            <input type="text"></input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-          <label>Pick Your Price:</label>
-            <span class="input-group-addon">
-              <input type="radio" name="price" value="$">$</input>
-            </span>
-            <span class="input-group-addon">
-              <input type="radio" name="price" value="$$">$$</input>
-            </span>
-            <span class="input-group-addon">
-              <input type="radio" name="price" value="$$$">$$$</input>
-            </span>
-            <span class="input-group-addon">
-              <input type="radio" name="price" value="$$$$">$$$$</input>
-            </span>
-        </div>
-        <div class="col-md-3"></div>
-      </div>
+        <div class="col-md-9">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <label>What is your name?</label>
+                <select id="nameChoice">
+                  <option value="" disabled selected>--Please Select--</option>
+                  <option value = "lamson">Lamson</option>
+                  <option value = "matt">Matt</option>
+                  <option value = "naveed">Naveed</option>
+                  <option value = "nick">Nick</option>
+                </select>
+              </div>
 
-        <button class="btn btn-lg btn-primary" href="#" id="submit">Submit</button>
-      </form>
+              <div class="col-md-6">
+                <label>What sounds good?</label>
+                <select id="cuisineChoice">
+                  <option value="" disabled selected>--Please Select--</option>
+                  <option value = "mexican">Mexican</option>
+                  <option value = "thai">Thai</option>
+                  <option value = "pub">Pub</option>
+                  <option value = "chinese">Chinese</option>
+                  <option value = "pizza">Pizza</option>
+                  <option value = "vietnamese">Vietnamese</option>
+                  <option value = "japanese">Japanese</option>
+                  <option value = "indian">Indian</option>
+                  <option value = "burgers">Burgers</option>
+                  <option value = "seafood">Seafood</option>
+                </select>
+              </div>
+            </div>
 
-      <button class="btn btn-lg btn-success" href="#" id="placeVote">Place Your Vote</button>
-    </div>
-      <div class="col-md-3">
-        <div class="well">
-          <header>Already Voted</header>
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Where are you now?</label>
+                <input id="userLocation" type="text" value="920 SW Third Avenue 2nd Floor Portland, OR 97204"></input>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <label>Pick Your Price:</label>
+                  <span class="input-group-addon">
+                    <input type="radio" name="price" value="$">$</input>
+                  </span>
+                  <span class="input-group-addon">
+                    <input type="radio" name="price" value="$$">$$</input>
+                  </span>
+                  <span class="input-group-addon">
+                    <input type="radio" name="price" value="$$$">$$$</input>
+                  </span>
+                  <span class="input-group-addon">
+                    <input type="radio" name="price" value="$$$$">$$$$</input>
+                  </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-lg btn-primary" href="#" id="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div class="center">
+            <button class="btn btn-lg btn-success" href="#" id="placeVote">Place Your Vote</button>
+          </div>
+        </div>
+          <!-- Sidebar -->
+        <div class="col-md-3">
+          <div class="well">
+            <header>Already Voted</header>
+            <ul>
+              <li>Lamson</li>
+              <li>Naveed</li>
+              <li>Nick</li>
+              <li>Matt</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <selection class="col-xs-12 col-md-12">
+      <nav class="navbar navbar-default navbar-fixed-bottom">
+        <footer>Copyright © 2015 FacePalm, LLC. All Rights Reserved.</footer>
+      </nav>
+    </selection>
   </body>
 <html>
