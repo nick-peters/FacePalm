@@ -13,6 +13,8 @@ var groups = [
     ])
   ];
 
+var selectedGroup;
+
 function Group(groupName, members) {
   this.groupName = groupName;
   this.members = members || [];
@@ -125,7 +127,7 @@ $(function() {
 
     }
     else if ($("body").attr("id") == "formPage") {
-      var selectedGroup = getSelectedGroup();
+      selectedGroup = getSelectedGroup();
       for (i=0; i<selectedGroup.members.length; i++) {
         $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
           .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
