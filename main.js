@@ -53,8 +53,6 @@ $(function() {
       this.setCuisine = function(type) {
         this.cuisine = type;
       }
-
-
     }
 
     function storeGroups() {
