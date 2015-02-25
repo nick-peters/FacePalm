@@ -19,6 +19,10 @@ form {
   width: 50%;
 }
 
+.highlight {
+  color: lightgreen;
+}
+
 header {
   font-size: 32px;
   font-weight: bold;
