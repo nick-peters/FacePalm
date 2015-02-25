@@ -93,6 +93,7 @@ function placeDetailsCallback(data, status) {
 
 }
 
+
 $(function() {
 
     // mapOptions = {
@@ -121,6 +122,14 @@ $(function() {
       })
     }
     else if ($("body").attr("id") == "formPage") {
+
+      //Google autocomplete code for the location box
+      var autocomplete = new google.maps.places.Autocomplete(document.getElementById("userLocation"));
+      google.maps.event.addListener(autocomplete, 'place_changed', function(e) {
+          autocomplete.getPlace().geometry.location.lat();
+          autocomplete.getPlace().geometry.location.lng();
+        });
+
       selectedGroup = getSelectedGroup();
       for (i=0; i<selectedGroup.members.length; i++) {
         $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
@@ -148,6 +157,15 @@ $(function() {
       }
     }
 
+    function locationCalc() {
+      var avgLat = 0,
+          avgLng = 0;
+
+      for(var i = 0; i < selectedGroup.members.length; i++) {
+
+      }
+
+    }
 
 
 });
