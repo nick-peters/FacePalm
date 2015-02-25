@@ -1,6 +1,6 @@
 var groups = [
   new Group("FacePalm", [
-    new Member("Lamson"),
+    new Member("Lamson", "thai", 2),
     new Member("Matt"),
     new Member("Naveed"),
     new Member("Nick")
@@ -22,11 +22,24 @@ function Group(groupName, members) {
   this.addMembers = function(member) {
     this.members.push(member);
   }
+
+  this.findMember = function(findThisName) {
+    for(var i=0; i < this.members.length; i++) {
+      if (this.members[i].memberName == findThisName) {
+        return this.members[i];
+      }
+
+    }
+    console.log("Error: member not found in this group.");
+  }
 }
 
-function Member(memberName, cuisine) {
+function Member(memberName, cuisine, cost) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
+  this.targetCost = cost || 0;
+  this.lat = 0;
+  this.lng = 0;
 
   this.setMemberName = function(name) {
     this.memberName = name;
@@ -151,10 +164,12 @@ $(function() {
     else if ($("body").attr("id") == "formPage") {
 
       //Google autocomplete code for the location box
+      var newLat;
+      var newLng;
       var autocomplete = new google.maps.places.Autocomplete(document.getElementById("userLocation"));
       google.maps.event.addListener(autocomplete, 'place_changed', function(e) {
-          autocomplete.getPlace().geometry.location.lat();
-          autocomplete.getPlace().geometry.location.lng();
+          newLat = autocomplete.getPlace().geometry.location.lat();
+          newLng = autocomplete.getPlace().geometry.location.lng();
         });
 
       selectedGroup = getSelectedGroup();
@@ -188,8 +203,8 @@ $(function() {
       var avgLat = 0,
           avgLng = 0;
 
-
       for(var i = 0; i < selectedGroup.members.length; i++) {
+
 
       }
 
