@@ -18,3 +18,7 @@ form {
 #userLocation {
   width: 50%;
 }
+
+.highlight {
+  color: lightgreen;
+}

@@ -167,7 +167,9 @@ $(function() {
         e.preventDefault();
         var name = $('#nameChoice :selected').text();
         var cuisine = $('#cuisineChoice :selected').text();
-        $('#voted').append($('<li>').text(name));
+        // var cost = $('costChoice :selected').text();
+        // var loc = $('#locChoice :selected').text();
+        $('#voted').append($('<li>').text(name).addClass('highlight'));
       })
     }
     else if ($("body").attr("id") == "resultPage") {
