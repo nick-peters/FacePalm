@@ -14,7 +14,7 @@ var groups = [
     ])
   ];
 
-var selectedGroup = getSelectedGroup();
+ var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -22,25 +22,12 @@ function Group(groupName, members) {
   this.addMembers = function(member) {
     this.members.push(member);
   }
-
-  this.findMember = function(findThisName) {
-    for(var i=0; i < this.members.length; i++) {
-      if (this.members[i].memberName == findThisName) {
-        return this.members[i];
-      }
-
-    }
-    console.log("Error: member not found in this group.");
-  }
 }
 
 function Member(memberName, cuisine, targetCost) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
-  this.targetCost = targetCost || 0;
-  this.lat = 0;
-  this.lng = 0;
-
+  this.targetCost = targetCost
   this.setMemberName = function(name) {
     this.memberName = name;
   }
@@ -97,25 +84,30 @@ function cuisineCalc(){
   var mostVotes = 0;
   var sameArr = [];
   var votes = {}
+        //if cuisine exists in the object votes, increment its value
   for (var i =0; i < selectedGroup.members.length; i++){
     if (votes[selectedGroup.members[i].cuisine]){
         votes[selectedGroup.members[i].cuisine]++;
+        //if cuisine is not preset add and set its value to 1
     } else {
         votes[selectedGroup.members[i].cuisine] = 1;
       }
   }
-
+      //get most votes for the cuisine
   for (var j =0; j < selectedGroup.members.length; j++){
     if (votes[selectedGroup.members[j].cuisine] > mostVotes){
         mostVotes = votes[selectedGroup.members[j].cuisine];
     }
   }
-
+      //check key in votes object, if there are any key with simlar votes
+      //push it to array
   for (key in votes){
     if (mostVotes == votes[key]){
         sameArr.push(key);
     }
   }
+      //get the random number using the array length and
+      //use it as an index of arr to diplay the cuisine
   var result = sameArr[Math.floor((Math.random()* sameArr.length))];
   return result;
 }
@@ -157,35 +149,16 @@ $(function() {
       })
     }
     else if ($("body").attr("id") == "formPage") {
-
-      //Google autocomplete code for the location box
-      var newLat;
-      var newLng;
-      var autocomplete = new google.maps.places.Autocomplete(document.getElementById("userLocation"));
-      google.maps.event.addListener(autocomplete, 'place_changed', function(e) {
-          newLat = autocomplete.getPlace().geometry.location.lat();
-          newLng = autocomplete.getPlace().geometry.location.lng();
-        });
-
       selectedGroup = getSelectedGroup();
-      for ( i = 0; i < selectedGroup.members.length; i++ ) {
-        $('#nameChoice').append( $('<option>')
-          .text(selectedGroup.members[i].memberName)
-          .attr('value',selectedGroup.members[i].memberName.toLowerCase()) );
+      for (i=0; i<selectedGroup.members.length; i++) {
+        $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
+          .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
       }
-
-      $('#placeVote').on( 'click', function(e) {
-        e.preventDefault();
-        var name = $('#nameChoice :selected').text();
-        var cuisine = $('#cuisineChoice :selected').text();
-        var cost = $('[type=radio]:checked').attr('data-cost');
-        $('#voted').append($('<li>').text(name).addClass('highlight'));
-        var currentMember = selectedGroup.findMember(name);
-        currentMember.cuisine = cuisine;
-        currentMember.lat = newLat;
-        currentMember.lng = newLng;
-        currentMember.targetCost = cost;
-        console.log(currentMember);
+      $('#placeVote').on('click', function() {
+        var testname = $('#nameChoice :selected').text();
+        var othertestname = $('#cuisineChoice :selected').text();
+        console.log(testname)
+        console.log(othertestname)
       })
     }
     else if ($("body").attr("id") == "resultPage") {
@@ -201,43 +174,4 @@ $(function() {
         dropDown.appendChild(el);
       }
     }
-
-    function locationCalc() {
-      var avgLat = 0,
-          avgLng = 0;
-
-      for(var i = 0; i < selectedGroup.members.length; i++) {
-
-        avgLat += selectedGroup.members[i].lat;
-        avgLng += selectedGroup.members[i].lng;
-
-      }
-
-      avgLat /= selectedGroup.members.length;
-      avgLng /= selectedGroup.members.length;
-
-      return new google.maps.LatLng(avgLat, avgLng);
-
-    }
-
-
-// $( "#submit" ).prop( "disabled", true );
-
-// $('#submit').attr('disabled', true);
-
-
-// $('input[type=text],input[type=password]').keyup(function() {
-
-//     if ($('#nameChoice').val() !=''&&
-//         $('#cuisineChoice').val() != '' &&
-//         $('#target3').val() != ''&&
-//         $('#target4').val() != '') {
-
-//         $('#submit').removeAttr('disabled');
-//     } else {
-//         $('#submit').attr('disabled', 'disabled');
-//     }
-// });
-
-
 });

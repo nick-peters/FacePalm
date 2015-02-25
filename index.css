@@ -14,3 +14,15 @@ footer{
   text-align: center;
 }
 
+
+.circle-right-side {
+  width:100px;
+  height:100px;
+  border-radius:100px;
+  text-align:center;
+  background-image: url(http://pad3.whstatic.com/images/thumb/d/d0/Get-the-URL-for-Pictures-Step-1-Version-2.jpg/670px-Get-the-URL-for-Pictures-Step-1-Version-2.jpg);
+  background-size:contain;
+  border: 1px solid #979797;
+}
+
+
