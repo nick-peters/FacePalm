@@ -13,7 +13,7 @@ var groups = [
     ])
   ];
 
-var selectedGroup;
+ var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -93,6 +93,33 @@ function placeDetailsCallback(data, status) {
 
 }
 
+function cuisineCalc(){
+  var mostVotes = 0;
+  var sameArr = [];
+  var votes = {}
+  for (var i =0; i < selectedGroup.members.length; i++){
+    if (votes[selectedGroup.members[i].cuisine]){
+        votes[selectedGroup.members[i].cuisine]++;
+    } else {
+        votes[selectedGroup.members[i].cuisine] = 1;
+      }
+  }
+
+  for (var j =0; j < selectedGroup.members.length; j++){
+    if (votes[selectedGroup.members[j].cuisine] > mostVotes){
+        mostVotes = votes[selectedGroup.members[j].cuisine];
+    }
+  }
+
+  for (key in votes){
+    if (mostVotes == votes[key]){
+        sameArr.push(key);
+    }
+  }
+    var result = sameArr[Math.floor((Math.random()* sameArr.length))];
+
+  return result;
+}
 
 $(function() {
 
@@ -166,6 +193,5 @@ $(function() {
       }
 
     }
-
 
 });
