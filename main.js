@@ -1,9 +1,9 @@
 var groups = [
   new Group("FacePalm", [
-    new Member("Lamson","thai",20),
-    new Member("Matt","thai",30),
-    new Member("Naveed","thai",40),
-    new Member("Nick","thai",50)
+    new Member("Lamson"),
+    new Member("Matt"),
+    new Member("Naveed"),
+    new Member("Nick")
     ]),
 
   new Group("BuckSnort", [
@@ -19,8 +19,6 @@ var groups = [
 function Group(groupName, members) {
   this.groupName = groupName;
   this.members = members || [];
-
-
   this.addMembers = function(member) {
     this.members.push(member);
   }
@@ -30,74 +28,56 @@ function Member(memberName, cuisine, targetCost) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
   this.targetCost = targetCost
-
   this.setMemberName = function(name) {
     this.memberName = name;
   }
-
   this.setCuisine = function(type) {
     this.cuisine = type;
   }
-
   this.settargetCost = function(targetCost){
     this.targetCost = targetCost;
   }
 }
 
 function storeGroups() {
-
   localStorage.setItem("groups", JSON.stringify(groups));
-
 }
 
 function readGroups() {
-
   groups = JSON.parse(localStorage.getItem("groups"));
-
   for (var i=0; i < groups.length; i++) {
-
     for (var j=0; j < groups[i].members.length; j++) {
       groups[i].members[j] = new Member(groups[i].members[j].memberName,
-        groups[i].members[j].cuisine);
+      groups[i].members[j].cuisine);
     }
-
-    groups[i] = new Group(groups[i].groupName, groups[i].members);
-
+      groups[i] = new Group(groups[i].groupName, groups[i].members);
   }
-
 }
 
 function getSelectedGroup() {
  var selectedGroup = localStorage.getItem("selectedGroup");
- for (var i = 0; i < groups.length; i++) {
-   if (groups[i].groupName == selectedGroup) {
+  for (var i = 0; i < groups.length; i++) {
+    if (groups[i].groupName == selectedGroup) {
      return groups[i];
-   }
- }
+    }
+  }
 }
 
 function textSearchCallback(data, status) {
-
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     search.getDetails({placeId: data[0].place_id}, placeDetailsCallback);
   }
-
   else {
     console.log("Place Your Face Into Your Palm, Error: " + status);
   }
-
 }
 
 function placeDetailsCallback(data, status) {
-
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-
   }
-
   else {
     console.log("Place Your Face Into Your Palm, Error: " + status);
   }
-
 }
 
 function cuisineCalc(){
@@ -123,7 +103,7 @@ function cuisineCalc(){
         sameArr.push(key);
     }
   }
-    var result = sameArr[Math.floor((Math.random()* sameArr.length))];
+  var result = sameArr[Math.floor((Math.random()* sameArr.length))];
   return result;
 }
 
@@ -135,9 +115,6 @@ function costCalc(){
   var avg = Math.round(sum/selectedGroup.members.length);
   return avg;
 }
-var num = costCalc();
-console.log(num);
-
 
 $(function() {
 
@@ -177,7 +154,6 @@ $(function() {
         var othertestname = $('#cuisineChoice :selected').text();
         console.log(testname)
         console.log(othertestname)
-
       })
     }
     else if ($("body").attr("id") == "resultPage") {
