@@ -190,6 +190,7 @@ $(function() {
       var avgLat = 0,
           avgLng = 0;
 
+
       for(var i = 0; i < selectedGroup.members.length; i++) {
 
       }

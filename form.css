@@ -1,5 +1,5 @@
 #container{
-  margin: 80px 50px 0 50px;
+  margin: 150px 50px 0 50px;
 }
 
 form {
@@ -21,4 +21,16 @@ form {
 
 .highlight {
   color: lightgreen;
+}
+
+header {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: right;
+  margin-right: 10%;
+}
+
+nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
