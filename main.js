@@ -199,9 +199,14 @@ $(function() {
         e.preventDefault();
         var name = $('#nameChoice :selected').text();
         var cuisine = $('#cuisineChoice :selected').text();
-        // var cost = $('costChoice :selected').text();
-        // var loc = $('#locChoice :selected').text();
+        var cost = $('[type=radio]:checked').attr('data-cost');
         $('#voted').append($('<li>').text(name).addClass('highlight'));
+        var currentMember = selectedGroup.findMember(name);
+        currentMember.cuisine = cuisine;
+        currentMember.lat = newLat;
+        currentMember.lng = newLng;
+        currentMember.targetCost = cost;
+        console.log(currentMember);
       })
     }
     else if ($("body").attr("id") == "resultPage") {
