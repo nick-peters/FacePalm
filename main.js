@@ -224,8 +224,15 @@ $(function() {
 
       for(var i = 0; i < selectedGroup.members.length; i++) {
 
+        avgLat += selectedGroup.members[i].lat;
+        avgLng += selectedGroup.members[i].lng;
 
       }
+
+      avgLat /= selectedGroup.members.length;
+      avgLng /= selectedGroup.members.length;
+
+      return new google.maps.LatLng(avgLat, avgLng);
 
     }
 
