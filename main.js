@@ -13,7 +13,7 @@ var groups = [
     ])
   ];
 
- var selectedGroup = getSelectedGroup();
+var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -158,16 +158,16 @@ $(function() {
         });
 
       selectedGroup = getSelectedGroup();
-      for (i=0; i<selectedGroup.members.length; i++) {
-        $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
-          .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
+      for ( i = 0; i < selectedGroup.members.length; i++ ) {
+        $('#nameChoice').append( $('<option>')
+          .text(selectedGroup.members[i].memberName)
+          .attr('value',selectedGroup.members[i].memberName.toLowerCase()) );
       }
-      $('#placeVote').on('click', function() {
-        var testname = $('#nameChoice :selected').text();
-        var othertestname = $('#cuisineChoice :selected').text();
-        console.log(testname)
-        console.log(othertestname)
-
+      $('#placeVote').on( 'click', function(e) {
+        e.preventDefault();
+        var name = $('#nameChoice :selected').text();
+        var cuisine = $('#cuisineChoice :selected').text();
+        $('#voted').append($('<li>').text(name));
       })
     }
     else if ($("body").attr("id") == "resultPage") {
