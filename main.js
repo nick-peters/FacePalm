@@ -7,14 +7,15 @@ var groups = [
     ]),
 
   new Group("BuckSnort", [
-    new Member("Ron"),
-    new Member("Dane"),
-    new Member("Fan"),
-    new Member("Daniel")
+    new Member("Ron", 'thai', 2, 45.522855, -122.673067),
+    new Member("Dane", 'thai', 1, 45.522658, -122.682575),
+    new Member("Fan", 'chinese', 1, 45.517630, -122.682954),
+    new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
     ])
   ];
 
- var selectedGroup = getSelectedGroup();
+var selectedGroup = getSelectedGroup();
+var calcSearch = {};
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -24,10 +25,13 @@ function Group(groupName, members) {
   }
 }
 
-function Member(memberName, cuisine, targetCost) {
+function Member(memberName, cuisine, targetCost, lat, lng) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
-  this.targetCost = targetCost
+  this.targetCost = targetCost || 0;
+  this.lat = lat || 0;
+  this.lng = lng || 0;
+
   this.setMemberName = function(name) {
     this.memberName = name;
   }
@@ -63,17 +67,10 @@ function getSelectedGroup() {
   }
 }
 
-function textSearchCallback(data, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    search.getDetails({placeId: data[0].place_id}, placeDetailsCallback);
-  }
-  else {
-    console.log("Place Your Face Into Your Palm, Error: " + status);
-  }
-}
 
 function placeDetailsCallback(data, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
+    console.log(data)
   }
   else {
     console.log("Place Your Face Into Your Palm, Error: " + status);
@@ -123,22 +120,6 @@ function costCalc(){
 
 $(function() {
 
-    // mapOptions = {
-    //   center: { lat: 45.516250, lng: -122.676610},
-    //   zoom: 17
-    // };
-
-    // var map = new google.maps.Map(document.getElementById('map-canvas'),
-    //     mapOptions);
-
-    // var search = new google.maps.places.PlacesService(map)
-
-    // google.maps.event.addListenerOnce(map, 'idle', function() {
-
-    //   search.textSearch({query: "thai", types: ["restaurant"], location: map.getCenter(), radius: 1000}, textSearchCallback);
-
-    // });
-
     storeGroups();
 
     if ($("body").attr("id") == "frontPage") {
@@ -154,12 +135,54 @@ $(function() {
         $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
           .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
       }
-      $('#placeVote').on('click', function() {
-        var testname = $('#nameChoice :selected').text();
-        var othertestname = $('#cuisineChoice :selected').text();
-        console.log(testname)
-        console.log(othertestname)
+
+      $('#placeVote').on( 'click', function(e) {
+        e.preventDefault();
+        var name = $('#nameChoice :selected').text();
+        var cuisine = $('#cuisineChoice :selected').text();
+        var cost = $('[type=radio]:checked').attr('data-cost');
+        $('#voted').append($('<li>').text(name).addClass('highlight'));
+        var currentMember = selectedGroup.findMember(name);
+        currentMember.cuisine = cuisine;
+        currentMember.lat = newLat;
+        currentMember.lng = newLng;
+        currentMember.targetCost = cost;
       })
+
+      $('#submit').on( 'click', function(e) {
+        e.preventDefault();
+
+        calcSearch.cuisine = cuisineCalc();
+        calcSearch.targetCost = costCalc();
+        calcSearch.loc = locationCalc();
+
+        console.log(calcSearch);
+
+        mapOptions = {
+          center: calcSearch.loc,
+          zoom: 17
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-search'),
+            mapOptions);
+
+        var search = new google.maps.places.PlacesService(map);
+
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+
+          search.textSearch({query: calcSearch.cuisine, types: ["restaurant"],
+           location: map.getCenter(), radius: 2000}, function(data, status) {
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                localStorage.setItem("resultsLocation", data[0].place_id)
+                // search.getDetails( {placeId: data[0].place_id}, placeDetailsCallback );
+              }
+              else {
+                console.log("Place Your Face Into Your Palm, Error: " + status);
+              }
+          });
+        });
+      })
+
     }
     else if ($("body").attr("id") == "resultPage") {
     }
