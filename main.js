@@ -14,7 +14,7 @@ var groups = [
     ])
   ];
 
- var selectedGroup = getSelectedGroup();
+var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -22,12 +22,25 @@ function Group(groupName, members) {
   this.addMembers = function(member) {
     this.members.push(member);
   }
+
+  this.findMember = function(findThisName) {
+    for(var i=0; i < this.members.length; i++) {
+      if (this.members[i].memberName == findThisName) {
+        return this.members[i];
+      }
+
+    }
+    console.log("Error: member not found in this group.");
+  }
 }
 
 function Member(memberName, cuisine, targetCost) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
-  this.targetCost = targetCost
+  this.targetCost = targetCost || 0;
+  this.lat = 0;
+  this.lng = 0;
+
   this.setMemberName = function(name) {
     this.memberName = name;
   }
@@ -144,16 +157,35 @@ $(function() {
       })
     }
     else if ($("body").attr("id") == "formPage") {
+
+      //Google autocomplete code for the location box
+      var newLat;
+      var newLng;
+      var autocomplete = new google.maps.places.Autocomplete(document.getElementById("userLocation"));
+      google.maps.event.addListener(autocomplete, 'place_changed', function(e) {
+          newLat = autocomplete.getPlace().geometry.location.lat();
+          newLng = autocomplete.getPlace().geometry.location.lng();
+        });
+
       selectedGroup = getSelectedGroup();
-      for (i=0; i<selectedGroup.members.length; i++) {
-        $('#nameChoice').append($('<option>').text(selectedGroup.members[i].memberName)
-          .attr('value',selectedGroup.members[i].memberName.toLowerCase()));
+      for ( i = 0; i < selectedGroup.members.length; i++ ) {
+        $('#nameChoice').append( $('<option>')
+          .text(selectedGroup.members[i].memberName)
+          .attr('value',selectedGroup.members[i].memberName.toLowerCase()) );
       }
-      $('#placeVote').on('click', function() {
-        var testname = $('#nameChoice :selected').text();
-        var othertestname = $('#cuisineChoice :selected').text();
-        console.log(testname)
-        console.log(othertestname)
+
+      $('#placeVote').on( 'click', function(e) {
+        e.preventDefault();
+        var name = $('#nameChoice :selected').text();
+        var cuisine = $('#cuisineChoice :selected').text();
+        var cost = $('[type=radio]:checked').attr('data-cost');
+        $('#voted').append($('<li>').text(name).addClass('highlight'));
+        var currentMember = selectedGroup.findMember(name);
+        currentMember.cuisine = cuisine;
+        currentMember.lat = newLat;
+        currentMember.lng = newLng;
+        currentMember.targetCost = cost;
+        console.log(currentMember);
       })
     }
     else if ($("body").attr("id") == "resultPage") {
@@ -169,4 +201,43 @@ $(function() {
         dropDown.appendChild(el);
       }
     }
+
+    function locationCalc() {
+      var avgLat = 0,
+          avgLng = 0;
+
+      for(var i = 0; i < selectedGroup.members.length; i++) {
+
+        avgLat += selectedGroup.members[i].lat;
+        avgLng += selectedGroup.members[i].lng;
+
+      }
+
+      avgLat /= selectedGroup.members.length;
+      avgLng /= selectedGroup.members.length;
+
+      return new google.maps.LatLng(avgLat, avgLng);
+
+    }
+
+
+// $( "#submit" ).prop( "disabled", true );
+
+// $('#submit').attr('disabled', true);
+
+
+// $('input[type=text],input[type=password]').keyup(function() {
+
+//     if ($('#nameChoice').val() !=''&&
+//         $('#cuisineChoice').val() != '' &&
+//         $('#target3').val() != ''&&
+//         $('#target4').val() != '') {
+
+//         $('#submit').removeAttr('disabled');
+//     } else {
+//         $('#submit').attr('disabled', 'disabled');
+//     }
+// });
+
+
 });
