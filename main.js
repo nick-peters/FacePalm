@@ -74,12 +74,12 @@ function readGroups() {
 }
 
 function getSelectedGroup() {
- var selectedGroup = localStorage.getItem("selectedGroup");
- for (var i = 0; i < groups.length; i++) {
-   if (groups[i].groupName == selectedGroup) {
-     return groups[i];
-   }
- }
+  var selectedGroup = localStorage.getItem("selectedGroup");
+  for (var i = 0; i < groups.length; i++) {
+    if (groups[i].groupName == selectedGroup) {
+    return groups[i];
+    }
+  }
 }
 
 function textSearchCallback(data, status) {
@@ -211,5 +211,25 @@ $(function() {
       }
 
     }
+
+
+// $( "#submit" ).prop( "disabled", true );
+
+// $('#submit').attr('disabled', true);
+
+
+// $('input[type=text],input[type=password]').keyup(function() {
+
+//     if ($('#nameChoice').val() !=''&&
+//         $('#cuisineChoice').val() != '' &&
+//         $('#target3').val() != ''&&
+//         $('#target4').val() != '') {
+
+//         $('#submit').removeAttr('disabled');
+//     } else {
+//         $('#submit').attr('disabled', 'disabled');
+//     }
+// });
+
 
 });
