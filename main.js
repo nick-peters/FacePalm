@@ -1,10 +1,11 @@
 var groups = [
   new Group("FacePalm", [
-    new Member("Lamson"),
-    new Member("Matt"),
-    new Member("Naveed"),
-    new Member("Nick")
+    new Member("Lamson","thai",20),
+    new Member("Matt","thai",30),
+    new Member("Naveed","thai",40),
+    new Member("Nick","thai",50)
     ]),
+
   new Group("BuckSnort", [
     new Member("Ron"),
     new Member("Dane"),
@@ -19,14 +20,16 @@ function Group(groupName, members) {
   this.groupName = groupName;
   this.members = members || [];
 
+
   this.addMembers = function(member) {
     this.members.push(member);
   }
 }
 
-function Member(memberName, cuisine) {
+function Member(memberName, cuisine, targetCost) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
+  this.targetCost = targetCost
 
   this.setMemberName = function(name) {
     this.memberName = name;
@@ -34,6 +37,10 @@ function Member(memberName, cuisine) {
 
   this.setCuisine = function(type) {
     this.cuisine = type;
+  }
+
+  this.settargetCost = function(targetCost){
+    this.targetCost = targetCost;
   }
 }
 
@@ -117,9 +124,20 @@ function cuisineCalc(){
     }
   }
     var result = sameArr[Math.floor((Math.random()* sameArr.length))];
-
   return result;
 }
+
+function costCalc(){
+  var sum = 0;
+  for (var i = 0; i < selectedGroup.members.length; i ++){
+    sum += selectedGroup.members[i].targetCost;
+  }
+  var avg = Math.round(sum/selectedGroup.members.length);
+  return avg;
+}
+var num = costCalc();
+console.log(num);
+
 
 $(function() {
 
