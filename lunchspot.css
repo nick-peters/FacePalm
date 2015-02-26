@@ -1,5 +1,26 @@
+nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+body {
+  background-image: url(portland.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.panel {
+  border: solid;
+}
+
+#container {
+  margin: 150px 50px;
+}
+
 #result {
   text-align: center;
+  padding: 50px;
 }
 
 #name {
@@ -9,8 +30,15 @@
 
 }
 
+#details {
+  margin: 50px auto;
+}
+
 #map-canvas {
   /*width: 640px;*/
   height: 400px;
-  margin: 50px;
+  margin: 50px 25px;
+  border: solid;
 }
+
+
