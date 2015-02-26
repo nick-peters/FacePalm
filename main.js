@@ -4,10 +4,10 @@ readGroups();
 
 if(!groups["FacePalm"]) {
     groups["FacePalm"] = new Group("FacePalm", [
-    new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
-    new Member("Matt", 'thai', 1, 45.522658, -122.682575),
-    new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
-    new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
+    new Member("Lamson"),
+    new Member("Matt"),
+    new Member("Naveed"),
+    new Member("Nick")
     ]);
 }
 if(!groups["BuckSnort"]) {
@@ -202,6 +202,7 @@ $(function() {
         currentMember.lat = newLat;
         currentMember.lng = newLng;
         currentMember.targetCost = cost;
+        enableSubmitCheck();
       })
 
       $('#submit').on( 'click', function(e) {
@@ -240,7 +241,43 @@ $(function() {
         });
       });
 
+      var $nameDrop = $("#nameChoice");
+      var $cuisineDrop = $("#cuisineChoice");
+      var $userLocation = $("#userLocation");
+      var $priceRadio = $("[type=radio]");
+      var $voteButton = $("#placeVote");
+
+      $nameDrop.on('change', validateVoteButton);
+      $cuisineDrop.on('change', validateVoteButton);
+      $userLocation.on('change', validateVoteButton);
+      $priceRadio.on('change', validateVoteButton);
+
+      function validateVoteButton() {
+        if(
+            $nameDrop.text() != '--Please Select--' &&
+            $cuisineDrop.text() != '--Please Select--' &&
+            $userLocation.val() != "" &&
+            $('[type=radio]:checked').length > 0)
+        {
+          $voteButton.removeAttr('disabled');
+        }
+        else {
+          $voteButton.attr('disabled', 'disabled');
+        }
+      }
+
+      function enableSubmitCheck() {
+        for (var i = 0; i < selectedGroup.members.length; i++) {
+          if (selectedGroup.members[i].cuisine == "") {
+            return
+          }
+        }
+        $('#submit').removeAttr('disabled');
+      }
     }
+
+
+
     else if ($("body").attr("id") == "resultPage") {
       // var loc = localStorage.resultsLocation;
       // console.log(loc);
@@ -277,57 +314,6 @@ $(function() {
     }
 
 
-// vote button should be disabled until form filled out
-// submit button disabled until everyone has placed vote
-
-
-
-
-
-
-
-
-    // $('#placeVote').attr('disabled', true);
-
-    // $(form:input).change(function() {
-
-    //     if ($('#nameChoice').val() != '' &&
-    //         $('#cuisineChoice').val() != '' &&
-    //         $('#userLocation').val() != '' &&
-    //         $('#costChoice').val() != '') {
-
-    //         $('#placeVote').removeAttr('disabled');
-    //     }
-    //     else {
-    //         $('#placeVote').attr('disabled', false);
-    //     }
-    // });
-
-
 });
 
-    // var nameDrop = $("#nameChoice");
-    // var cuisineDrop = $("#cuisineChoice");
-    var $userLocation = $("#userLocation");
-    // var priceRadio = $("#costChoice");
-    var $voteButton = $("#placeVote");
 
-
-    // $nameDrop.on('select', validateVoteButton);
-    // $cuisineDrop.on('select', validateVoteButton);
-    $userLocation.on('blur', validateVoteButton);
-    // $radioButton.on('checked', validateVoteButton);
-
-    function validateVoteButton() {
-      alert('test');
-      if(
-          // nameDrop.selectIndex() != 0 &&
-          // cuisineDrop.selectIndex() != 0 &&
-          $userLocation.val() != ""
-          // radioButton.selectIndex() > -1 )
-      ){
-          $voteButton.enabled = true;
-      } else {
-          $voteButton.enabled = false;
-      }
-    };
