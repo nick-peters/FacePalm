@@ -91,25 +91,30 @@ function cuisineCalc(){
   var mostVotes = 0;
   var sameArr = [];
   var votes = {}
+        //if cuisine exists in the object votes, increment its value
   for (var i =0; i < selectedGroup.members.length; i++){
     if (votes[selectedGroup.members[i].cuisine]){
         votes[selectedGroup.members[i].cuisine]++;
+        //if cuisine is not preset add and set its value to 1
     } else {
         votes[selectedGroup.members[i].cuisine] = 1;
       }
   }
-
+      //get most votes for the cuisine
   for (var j =0; j < selectedGroup.members.length; j++){
     if (votes[selectedGroup.members[j].cuisine] > mostVotes){
         mostVotes = votes[selectedGroup.members[j].cuisine];
     }
   }
-
+      //check key in votes object, if there are any key with simlar votes
+      //push it to array
   for (key in votes){
     if (mostVotes == votes[key]){
         sameArr.push(key);
     }
   }
+      //get the random number using the array length and
+      //use it as an index of arr to diplay the cuisine
   var result = sameArr[Math.floor((Math.random()* sameArr.length))];
   return result;
 }
