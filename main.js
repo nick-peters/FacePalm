@@ -204,10 +204,13 @@ $(function() {
               }
           });
         });
-      })
+      });
 
     }
     else if ($("body").attr("id") == "resultPage") {
+      // var loc = localStorage.resultsLocation;
+      // console.log(loc);
+      // console.log('hello');
     }
 
     function listGroupsDropDownFP(){
