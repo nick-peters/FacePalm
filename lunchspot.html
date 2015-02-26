@@ -18,26 +18,32 @@
     <!-- <script type="text/javascript" scr="main.js"></script> -->
 
     <script type="text/javascript" src="lunchspot.js"></script>
-
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="lunchspot.css">
   </head>
 
-  <nav>
-    <div>NAV BAR</div>
-  </nav>
-
   <body id="resultPage">
-
-    <div class="container">
-
-      <div id="result" class="jumbotron">
-        <div>Your hot spot today will be:</div>
-        <div id="name"></div>
+    <selection class="col-xs-12 col-md-12">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutUs.html">About Us</a></li>
+        </ul>
+        <header>Lunch Bag Ninja</header>
+      </nav>
+    </selection>
+    <div id="container" class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div id="result" class="col-md-8 panel">
+          <div>Go Grub At:</div>
+          <div id="name"></div>
+        </div>
       </div>
 
       <div class="row">
-        <div class="col-xs-6 col-md-4">
-          Address:
+        <div id="details" class="col-xs-6 col-md-4 panel">
+          </br>Address:
           <div id="address"></div></br>
           Phone Number:
           <div id="phone"></div></br>
@@ -52,10 +58,12 @@
 
     </div>
 
+    <!-- Footer -->
+    <selection class="col-xs-12 col-md-12">
+      <nav class="navbar navbar-default navbar-fixed-bottom">
+        <footer>Copyright &copy; 2015 FacePalm, LLC. All Rights Reserved.</footer>
+      </nav>
+    </selection>
   </body>
-  <footer>
-
-  </footer>
-
 </html>
 
