@@ -34,3 +34,24 @@ nav {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+
+
+/**********************************************************
+MEDIA QUERIES
+**********************************************************/
+
+@media screen and (max-width: 768px) {
+
+  #container {
+    margin-top: 300px;
+  }
+
+  .nav>li {
+    display: inline-block;
+  }
+
+  header {
+    text-align: center;
+  }
+  }
