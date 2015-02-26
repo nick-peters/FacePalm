@@ -1,22 +1,17 @@
 $(function(){
 
   var mapOptions = {
-            center: { lat: 45.535849, lng: -122.620622 },
-            zoom: 12
+            center: { lat: 0, lng: 0 },
+            zoom: 15
           };
+
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  function PrintName (name) {
-    $('#name').text(name);
-  }
+  var search = new google.maps.places.PlacesService(map);
 
-  function PrintLoc (address) {
-    $('#address').text(address);
-  }
-
-  function Marker (lat, lng, name, desc) {
+  function Marker (loc, name, desc) {
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng),
+        position: loc,
         title: name
         // icon:
     });
@@ -30,8 +25,26 @@ $(function(){
     });
   }
 
-  PrintName('MEXI-THAI-YAKI');
-  PrintLoc('12345 Burnside Bridge, PDX')
-  Marker(45.522927, -122.673008, 'VooDoo', 'FOODMONGER yo');
+  function openingHours(place) {
+    var text = "";
+    this.place = place;
+    for( i = 0; i < place.opening_hours.weekday_text.length; i++ ) {
+      text += place.opening_hours.weekday_text[i] + "\n" + "</br>";
+    }
+    return text;
+  }
+
+  var loc = {
+    placeId:localStorage.getItem('resultsLocation')
+  };
+
+  search.getDetails(loc, function(place) {
+    $('#name').text(place.name);
+    $('#address').text(place.formatted_address);
+    $('#phone').text(place.international_phone_number);
+    $('#rating').text(place.rating);
+    map.setCenter(place.geometry.location);
+    Marker(place.geometry.location, place.name, openingHours(place) );
+  });
 
 });
