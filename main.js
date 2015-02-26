@@ -1,21 +1,20 @@
 var groups = [
   new Group("FacePalm", [
-    new Member("Lamson"),
-    new Member("Matt"),
-    new Member("Naveed"),
-    new Member("Nick")
+    new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
+    new Member("Matt", 'thai', 1, 45.522658, -122.682575),
+    new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
+    new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
     ]),
 
   new Group("BuckSnort", [
-    new Member("Ron", 'thai', 2, 45.522855, -122.673067),
-    new Member("Dane", 'thai', 1, 45.522658, -122.682575),
-    new Member("Fan", 'chinese', 1, 45.517630, -122.682954),
+    new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
+    new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
+    new Member("Fan", 'thai', 1, 45.517630, -122.682954),
     new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
     ])
   ];
 
 var selectedGroup = getSelectedGroup();
-var calcSearch = {};
 
 function Group(groupName, members) {
   this.groupName = groupName;
@@ -137,6 +136,7 @@ $(function() {
       $('#groupSelector').on('click', function(){
           var dropDown = document.getElementById("groupNames");
           localStorage.setItem("selectedGroup", dropDown.value);
+          window.location = "form.html"
       })
     }
     else if ($("body").attr("id") == "formPage") {
@@ -173,11 +173,11 @@ $(function() {
       $('#submit').on( 'click', function(e) {
         e.preventDefault();
 
+        var calcSearch = {};
+
         calcSearch.cuisine = cuisineCalc();
         calcSearch.targetCost = costCalc();
         calcSearch.loc = locationCalc();
-
-        console.log(calcSearch);
 
         mapOptions = {
           center: calcSearch.loc,
@@ -191,11 +191,13 @@ $(function() {
 
         google.maps.event.addListenerOnce(map, 'idle', function() {
 
-          search.textSearch({query: calcSearch.cuisine, types: ["restaurant"],
-           location: map.getCenter(), radius: 2000}, function(data, status) {
+          search.nearbySearch({keyword: calcSearch.cuisine, types: ["restaurant", "food"],
+            location: map.getCenter(), radius: 2000, minPriceLevel: calcSearch.targetCost,
+            maxPriceLevel: calcSearch.targetCost}, function(data, status) {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
                 localStorage.setItem("resultsLocation", data[0].place_id)
                 // search.getDetails( {placeId: data[0].place_id}, placeDetailsCallback );
+                window.location = "lunchspot.html"
               }
               else {
                 console.log("Place Your Face Into Your Palm, Error: " + status);
