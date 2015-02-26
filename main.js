@@ -1,25 +1,25 @@
-var groups = [
-  new Group("FacePalm", [
-    new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
-    new Member("Matt", 'thai', 1, 45.522658, -122.682575),
-    new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
-    new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
-    ]),
+var groups = [];
+  // new Group("FacePalm", [
+  //   new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
+  //   new Member("Matt", 'thai', 1, 45.522658, -122.682575),
+  //   new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
+  //   new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
+  //   ]),
 
-  new Group("BuckSnort", [
-    new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
-    new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
-    new Member("Fan", 'thai', 1, 45.517630, -122.682954),
-    new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
-    ])
-  ];
-
+  // new Group("BuckSnort", [
+  //   new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
+  //   new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
+  //   new Member("Fan", 'thai', 1, 45.517630, -122.682954),
+  //   new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
+  //   ])
+  // ];
+readGroups();
 var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
   this.groupName = groupName;
   this.members = members || [];
-  this.addMembers = function(member) {
+  this.addMember = function(member) {
     this.members.push(member);
   }
 
@@ -138,6 +138,40 @@ $(function() {
           localStorage.setItem("selectedGroup", dropDown.value);
           window.location = "form.html"
       })
+
+      $('#createGroupButton').on('click', function(){
+        $('#createGroupButton').hide();
+        $('#newGroup').append($('<label>').text("Enter New Group Name: "))
+          .append($('<input>').attr('type', 'text').attr('id', 'enterNewGroup'))
+          .append($('<br>'))
+          .append($('<label>').text("Enter New Member Name: "))
+          .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers'))
+          .append($('<br>'))
+          .append($('<button>').attr('class', 'btn btn-success').text("Add Member").attr('id', 'addMemberButton'))
+          .append($('<button>').attr('class', 'btn btn-primary').text("Submit").attr('id', 'submitNewGroup'));
+
+          $('#addMemberButton').on('click', function() {
+            $('#addMemberButton')
+              .before($('<label>').text("Enter New Member Name: "))
+              .before($('<input>').attr('type', 'text').attr('class', 'enterNewMembers'))
+              .before($('<br>'))
+          });
+
+          $('#submitNewGroup').on('click', function() {
+            var newGroup = new Group($('#enterNewGroup').val());
+            $('.enterNewMembers').each(function() {
+              newGroup.addMember(new Member($(this).val()));
+            });
+            groups.push(newGroup);
+            console.log(newGroup);
+            console.log(groups);
+            storeGroups();
+            localStorage.setItem("selectedGroup", newGroup.groupName);
+            window.location = "form.html"
+          });
+      });
+
+
     }
     else if ($("body").attr("id") == "formPage") {
 
@@ -161,7 +195,7 @@ $(function() {
         e.preventDefault();
         var name = $('#nameChoice :selected').text();
         var cuisine = $('#cuisineChoice :selected').text();
-        var cost = $('[type=radio]:checked').attr('data-cost');
+        var cost = parseInt($('[type=radio]:checked').attr('data-cost'));
         $('#voted').append($('<li>').text(name).addClass('highlight'));
         var currentMember = selectedGroup.findMember(name);
         currentMember.cuisine = cuisine;
