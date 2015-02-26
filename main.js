@@ -1,19 +1,26 @@
-var groups = [];
-  // new Group("FacePalm", [
-  //   new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
-  //   new Member("Matt", 'thai', 1, 45.522658, -122.682575),
-  //   new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
-  //   new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
-  //   ]),
+var groups;
 
-  // new Group("BuckSnort", [
-  //   new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
-  //   new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
-  //   new Member("Fan", 'thai', 1, 45.517630, -122.682954),
-  //   new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
-  //   ])
-  // ];
 readGroups();
+
+if(!groups["FacePalm"]) {
+    groups["FacePalm"] = new Group("FacePalm", [
+    new Member("Lamson", 'thai', 2, 45.522855, -122.673067),
+    new Member("Matt", 'thai', 1, 45.522658, -122.682575),
+    new Member("Naveed", 'chinese', 1, 45.517630, -122.682954),
+    new Member("Nick", 'mexican', 3, 45.516638, -122.673770)
+    ]);
+}
+if(!groups["BuckSnort"]) {
+
+  groups["BuckSnort"] = new Group("BuckSnort", [
+    new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
+    new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
+    new Member("Fan", 'thai', 1, 45.517630, -122.682954),
+    new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
+    ]);
+
+}
+
 var selectedGroup = getSelectedGroup();
 
 function Group(groupName, members) {
@@ -57,8 +64,8 @@ function storeGroups() {
 }
 
 function readGroups() {
-  groups = JSON.parse(localStorage.getItem("groups"));
-  for (var i=0; i < groups.length; i++) {
+  groups = JSON.parse(localStorage.getItem("groups")) || {};
+  for (var i in groups) {
     for (var j=0; j < groups[i].members.length; j++) {
       groups[i].members[j] = new Member(groups[i].members[j].memberName,
       groups[i].members[j].cuisine);
@@ -68,12 +75,7 @@ function readGroups() {
 }
 
 function getSelectedGroup() {
- var selectedGroup = localStorage.getItem("selectedGroup");
-  for (var i = 0; i < groups.length; i++) {
-    if (groups[i].groupName == selectedGroup) {
-     return groups[i];
-    }
-  }
+   return groups[localStorage.getItem("selectedGroup")];
 }
 
 
@@ -129,8 +131,6 @@ function costCalc(){
 
 $(function() {
 
-    storeGroups();
-
     if ($("body").attr("id") == "frontPage") {
           listGroupsDropDownFP();
       $('#groupSelector').on('click', function(){
@@ -162,7 +162,7 @@ $(function() {
             $('.enterNewMembers').each(function() {
               newGroup.addMember(new Member($(this).val()));
             });
-            groups.push(newGroup);
+            groups[newGroup.groupName] = newGroup;
             console.log(newGroup);
             console.log(groups);
             storeGroups();
@@ -249,7 +249,7 @@ $(function() {
 
     function listGroupsDropDownFP(){
       var dropDown = document.getElementById("groupNames");
-      for (var i = 0; i < groups.length; i++){
+      for (var i in groups){
         var opt = groups[i].groupName;
         var el = document.createElement("option");
         el.textContent = opt;
