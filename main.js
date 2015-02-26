@@ -243,23 +243,57 @@ $(function() {
     }
 
 
-// $( "#submit" ).prop( "disabled", true );
+// vote button should be disabled until form filled out
+// submit button disabled until everyone has placed vote
 
-// $('#submit').attr('disabled', true);
 
 
-// $('input[type=text],input[type=password]').keyup(function() {
 
-//     if ($('#nameChoice').val() !=''&&
-//         $('#cuisineChoice').val() != '' &&
-//         $('#target3').val() != ''&&
-//         $('#target4').val() != '') {
 
-//         $('#submit').removeAttr('disabled');
-//     } else {
-//         $('#submit').attr('disabled', 'disabled');
-//     }
-// });
+
+
+
+    // $('#placeVote').attr('disabled', true);
+
+    // $(form:input).change(function() {
+
+    //     if ($('#nameChoice').val() != '' &&
+    //         $('#cuisineChoice').val() != '' &&
+    //         $('#userLocation').val() != '' &&
+    //         $('#costChoice').val() != '') {
+
+    //         $('#placeVote').removeAttr('disabled');
+    //     }
+    //     else {
+    //         $('#placeVote').attr('disabled', false);
+    //     }
+    // });
 
 
 });
+
+    // var nameDrop = $("#nameChoice");
+    // var cuisineDrop = $("#cuisineChoice");
+    var $userLocation = $("#userLocation");
+    // var priceRadio = $("#costChoice");
+    var $voteButton = $("#placeVote");
+
+
+    // $nameDrop.on('select', validateVoteButton);
+    // $cuisineDrop.on('select', validateVoteButton);
+    $userLocation.on('blur', validateVoteButton);
+    // $radioButton.on('checked', validateVoteButton);
+
+    function validateVoteButton() {
+      alert('test');
+      if(
+          // nameDrop.selectIndex() != 0 &&
+          // cuisineDrop.selectIndex() != 0 &&
+          $userLocation.val() != ""
+          // radioButton.selectIndex() > -1 )
+      ){
+          $voteButton.enabled = true;
+      } else {
+          $voteButton.enabled = false;
+      }
+    };
