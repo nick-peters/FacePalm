@@ -19,8 +19,15 @@ form {
   width: 50%;
 }
 
+ul#voted {
+
+}
+
 .highlight {
-  color: lightgreen;
+  color: #337ab7;
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 header {
