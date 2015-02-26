@@ -5,9 +5,19 @@ header{
   margin: 0 auto;
 }
 
-#container{
-  margin: 80px auto 0 auto;
+#container {
+  /*margin: 80px auto 0 auto;*/
+  margin:80px auto auto auto;
   text-align: center;
+}
+#finalWords {
+  margin: 20px 20px 50px 20px;
+  margin-left: 20px;
+  text-align: justify;
+}
+#finalHead{
+  /*text-align: center;*/
+  font-weight: bold;
 }
 
 footer{
@@ -20,7 +30,7 @@ footer{
   height:150px;
   border-radius:50%;
   text-align:center;
-  background-image: url(naveed.jpg);
+  background-image: url(nick.jpeg);
   background-size: cover;
   border: 1px solid #979797;
   margin-bottom: 20px;
@@ -42,7 +52,7 @@ footer{
   height:150px;
   border-radius:50%;
   text-align:center;
-  background-image: url(naveed.jpg);
+  background-image: url(matt.jpeg);
   background-size: cover;
   border: 1px solid #979797;
   margin-bottom: 20px;
@@ -53,7 +63,7 @@ footer{
   height:150px;
   border-radius:50%;
   text-align:center;
-  background-image: url(naveed.jpg);
+  background-image: url(lamson.jpeg);
   background-size: cover;
   border: 1px solid #979797;
   margin-bottom: 20px;
