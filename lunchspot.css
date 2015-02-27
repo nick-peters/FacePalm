@@ -65,11 +65,11 @@ body {
   margin: 0px auto;
   text-align: center;
   opacity: 0;
-  -webkit-animation: disappear 2s;
-  -moz-animation: disappear 2s;
-  -ms-animation: disappear 2s;
-  -o-animation: disappear 2s;
-  animation: disappear 2s;
+  -webkit-animation: disappear 6s;
+  -moz-animation: disappear 6s;
+  -ms-animation: disappear 6s;
+  -o-animation: disappear 6s;
+  animation: disappear 6s;
   -webkit-animation-iteration-count: 1;
   -moz-animation-iteration-count: 1;
   -ms-animation-iteration-count: 1;
