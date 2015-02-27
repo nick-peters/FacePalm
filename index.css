@@ -9,6 +9,10 @@ header{
   margin: 0 auto;
 }
 
+#ninjaImage {
+  opacity: 0.4;
+}
+
 #container {
   margin:110px auto auto auto;
   text-align: center;
