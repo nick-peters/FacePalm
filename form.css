@@ -1,3 +1,7 @@
+* {
+  font-family: 'Vollkorn', serif;
+}
+
 #container{
   margin: 150px 50px 0 50px;
 }
@@ -88,7 +92,7 @@ ul#voted {
 }
 span.input-group-addon {
   color: darkgreen;
-  font-weight: 800;
+  font-weight: 500;
   font-size: 20px;
   letter-spacing: 3px;
   line-height: 1.5em;
