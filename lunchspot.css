@@ -1,3 +1,7 @@
+* {
+  font-family: 'Vollkorn', serif;
+}
+
 nav {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -31,6 +35,7 @@ body {
 #result {
   text-align: center;
   padding: 20px;
+  font-size: 16px;
 }
 
 #name {
@@ -42,6 +47,7 @@ body {
 
 #details {
   margin: 20px auto;
+  font-size: 16px;
 }
 
 #map-canvas {

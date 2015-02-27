@@ -21,7 +21,7 @@ $(function(){
       $('#address').text(place.formatted_address);
       $('#phone').text(place.international_phone_number);
       $('#rating').text(place.rating);
-      $('#website').append("<a href="+"'"+place.website+"'>"+place.website+"</a>");
+      $('#website').append('<a href='+ '"' + place.website + '">' + place.website + '</a>');
       map.setCenter(place.geometry.location);
       Marker(place.geometry.location, place.name, openingHours(place) );
     });
@@ -32,7 +32,6 @@ $(function(){
     var marker = new google.maps.Marker({
         position: loc,
         title: name
-        // icon:
     });
     var infowindow = new google.maps.InfoWindow({
         content: desc
