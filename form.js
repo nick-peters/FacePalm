@@ -62,10 +62,11 @@ $(function() {
     google.maps.event.addListenerOnce(map, 'idle', function() {
 
       search.nearbySearch({keyword: calcSearch.cuisine, types: ["restaurant", "food"],
-        location: map.getCenter(), radius: 6000, minPriceLevel: calcSearch.targetCost,
+        location: map.getCenter(), radius: 5000, minPriceLevel: calcSearch.targetCost,
         maxPriceLevel: calcSearch.targetCost}, function(data, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            localStorage.setItem("resultsLocation", data[0].place_id)
+            var finalSelection = Math.floor(Math.random() * Math.min(data.length, 5));
+            localStorage.setItem("resultsLocation", data[finalSelection].place_id)
             window.location = "lunchspot.html";
           }
           else {
