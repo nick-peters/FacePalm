@@ -69,7 +69,9 @@ function readGroups() {
   for (var i in groups) {
     for (var j=0; j < groups[i].members.length; j++) {
       groups[i].members[j] = new Member(groups[i].members[j].memberName,
-      groups[i].members[j].cuisine);
+      groups[i].members[j].cuisine, groups[i].members[j].targetCost,
+      groups[i].members[j].lat, groups[i].members[j].lng,
+      groups[i].members[j].voted);
     }
       groups[i] = new Group(groups[i].groupName, groups[i].members);
   }
