@@ -162,26 +162,36 @@ $(function() {
 
       $('#createGroupButton').on('click', function(){
         $('#createGroupButton').hide();
-        $('#newGroup').append($('<label>').text("Enter New Group Name: "))
-          .append($('<input>').attr('type', 'text').attr('id', 'enterNewGroup'))
-          .append($('<br>'))
-          .append($('<label>').text("Enter New Member Name: "))
-          .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers'))
-          .append($('<br>'))
-          .append($('<button>').attr('class', 'btn btn-success').text("Add Member").attr('id', 'addMemberButton'))
-          .append($('<button>').attr('class', 'btn btn-primary').text("Submit").attr('id', 'submitNewGroup'));
+        $('#newGroup')
+          .append($('<div>').attr('class', 'form-group')
+            .append($('<label>').text("Enter New Group Name:").attr('class','col-sm-6 control-label'))
+            .append($('<div>').attr('class', 'col-sm-1')
+              .append($('<input>').attr('type', 'text').attr('id', 'enterNewGroup').attr('class', 'form-control'))))
+          .append($('<div>').attr('class', 'form-group')
+            .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-6 control-label'))
+            .append($('<div>').attr('class', 'col-sm-1')
+              .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers form-control'))))
+          .append($('<div>').attr('class', 'form-group').attr('id', 'buttonGroup')
+            .append($('<div>').attr('class', 'col-sm-offset-2 col-sm-8')
+              .append($('<button>').attr('class', 'btn btn-success').text("Add Member").attr('id', 'addMemberButton'))
+              .append($('<button>').attr('class', 'btn btn-primary col-sm-offset-1').text("Submit").attr('id', 'submitNewGroup'))));
 
-          $('#addMemberButton').on('click', function() {
-            $('#addMemberButton')
-              .before($('<label>').text("Enter New Member Name: "))
-              .before($('<input>').attr('type', 'text').attr('class', 'enterNewMembers'))
-              .before($('<br>'))
+          $('#addMemberButton').on('click', function(e) {
+            e.preventDefault();
+            $('#buttonGroup')
+              .before($('<div>').attr('class', 'form-group')
+                .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-6 control-label'))
+                .append($('<div>').attr('class', 'col-sm-1')
+                  .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers form-control'))))
           });
 
-          $('#submitNewGroup').on('click', function() {
+          $('#submitNewGroup').on('click', function(e) {
+            e.preventDefault();
             var newGroup = new Group($('#enterNewGroup').val());
             $('.enterNewMembers').each(function() {
-              newGroup.addMember(new Member($(this).val()));
+              if($(this).val() != "") {
+                newGroup.addMember(new Member($(this).val()));
+              }
             });
             groups[newGroup.groupName] = newGroup;
             storeGroups();
