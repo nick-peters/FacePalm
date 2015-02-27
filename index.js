@@ -56,6 +56,7 @@ $(function() {
       });
   });
 
+  $('#resetLocalStorage').on('click', function(e) {localStorage.clear();});
 
   function listGroupsDropDownFP(){
     var dropDown = document.getElementById("groupNames");
