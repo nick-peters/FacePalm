@@ -88,8 +88,8 @@ $(function() {
 
   function validateVoteButton() {
     if(
-        $nameDrop.text() != '--Please Select--' &&
-        $cuisineDrop.text() != '--Please Select--' &&
+        $nameDrop.val() &&
+        $cuisineDrop.val() &&
         $userLocation.val() != "" &&
         $('[type=radio]:checked').length > 0)
     {
