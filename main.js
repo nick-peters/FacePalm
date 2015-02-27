@@ -13,10 +13,10 @@ if(!groups["FacePalm"]) {
 if(!groups["BuckSnort"]) {
 
   groups["BuckSnort"] = new Group("BuckSnort", [
-    new Member("Ron", 'chinese', 2, 45.522855, -122.673067),
-    new Member("Dane", 'chinese', 1, 45.522658, -122.682575),
-    new Member("Fan", 'thai', 1, 45.517630, -122.682954),
-    new Member("Daniel", 'mexican', 3, 45.516638, -122.673770)
+    new Member("Ron", 'chinese', 2, 45.522855, -122.673067, true),
+    new Member("Dane", 'chinese', 1, 45.522658, -122.682575, true),
+    new Member("Fan", 'thai', 1, 45.517630, -122.682954, true),
+    new Member("Daniel", 'mexican', 3, 45.516638, -122.673770, true)
     ]);
 
 }
@@ -41,12 +41,13 @@ function Group(groupName, members) {
   }
 }
 
-function Member(memberName, cuisine, targetCost, lat, lng) {
+function Member(memberName, cuisine, targetCost, lat, lng, voted) {
   this.memberName = memberName;
   this.cuisine = cuisine || "";
   this.targetCost = targetCost || 0;
   this.lat = lat || 0;
   this.lng = lng || 0;
+  this.voted = voted || false;
 
   this.setMemberName = function(name) {
     this.memberName = name;
@@ -129,6 +130,24 @@ function costCalc(){
   return avg;
 }
 
+function locationCalc() {
+  var avgLat = 0,
+      avgLng = 0;
+
+  for(var i = 0; i < selectedGroup.members.length; i++) {
+
+    avgLat += selectedGroup.members[i].lat;
+    avgLng += selectedGroup.members[i].lng;
+
+  }
+
+  avgLat /= selectedGroup.members.length;
+  avgLng /= selectedGroup.members.length;
+
+  return new google.maps.LatLng(avgLat, avgLng);
+
+}
+
 $(function() {
 
     if ($("body").attr("id") == "frontPage") {
@@ -136,7 +155,7 @@ $(function() {
       $('#groupSelector').on('click', function(){
           var dropDown = document.getElementById("groupNames");
           localStorage.setItem("selectedGroup", dropDown.value);
-          window.location = "form.html"
+          window.location = "form.html";
       })
 
       $('#createGroupButton').on('click', function(){
@@ -163,11 +182,9 @@ $(function() {
               newGroup.addMember(new Member($(this).val()));
             });
             groups[newGroup.groupName] = newGroup;
-            console.log(newGroup);
-            console.log(groups);
             storeGroups();
             localStorage.setItem("selectedGroup", newGroup.groupName);
-            window.location = "form.html"
+            window.location = "form.html";
           });
       });
 
@@ -185,10 +202,13 @@ $(function() {
         });
 
       selectedGroup = getSelectedGroup();
-      for ( i = 0; i < selectedGroup.members.length; i++ ) {
+      for (var i = 0; i < selectedGroup.members.length; i++ ) {
         $('#nameChoice').append( $('<option>')
           .text(selectedGroup.members[i].memberName)
           .attr('value',selectedGroup.members[i].memberName.toLowerCase()) );
+        if(selectedGroup.members[i].voted) {
+          $('#voted').append($('<li>').text(selectedGroup.members[i].memberName).addClass('highlight'));
+        }
       }
 
       $('#placeVote').on( 'click', function(e) {
@@ -196,12 +216,16 @@ $(function() {
         var name = $('#nameChoice :selected').text();
         var cuisine = $('#cuisineChoice :selected').text();
         var cost = parseInt($('[type=radio]:checked').attr('data-cost'));
-        $('#voted').append($('<li>').text(name).addClass('highlight'));
         var currentMember = selectedGroup.findMember(name);
+        if(!currentMember.voted) {
+          $('#voted').append($('<li>').text(name).addClass('highlight'));
+        }
         currentMember.cuisine = cuisine;
         currentMember.lat = newLat;
         currentMember.lng = newLng;
         currentMember.targetCost = cost;
+        currentMember.voted = true;
+        storeGroups();
         enableSubmitCheck();
       })
 
@@ -232,7 +256,7 @@ $(function() {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
                 localStorage.setItem("resultsLocation", data[0].place_id)
                 // search.getDetails( {placeId: data[0].place_id}, placeDetailsCallback );
-                window.location = "lunchspot.html"
+                window.location = "lunchspot.html";
               }
               else {
                 console.log("Place Your Face Into Your Palm, Error: " + status);
@@ -268,7 +292,7 @@ $(function() {
 
       function enableSubmitCheck() {
         for (var i = 0; i < selectedGroup.members.length; i++) {
-          if (selectedGroup.members[i].cuisine == "") {
+          if (!selectedGroup.members[i].voted) {
             return
           }
         }
@@ -294,25 +318,6 @@ $(function() {
         dropDown.appendChild(el);
       }
     }
-
-    function locationCalc() {
-      var avgLat = 0,
-          avgLng = 0;
-
-      for(var i = 0; i < selectedGroup.members.length; i++) {
-
-        avgLat += selectedGroup.members[i].lat;
-        avgLng += selectedGroup.members[i].lng;
-
-      }
-
-      avgLat /= selectedGroup.members.length;
-      avgLng /= selectedGroup.members.length;
-
-      return new google.maps.LatLng(avgLat, avgLng);
-
-    }
-
 
 });
 
