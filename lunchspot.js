@@ -7,7 +7,24 @@ $(function(){
 
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  var search = new google.maps.places.PlacesService(map);
+  google.maps.event.addListenerOnce(map, 'idle', function() {
+
+    var search = new google.maps.places.PlacesService(map);
+
+    var loc = {
+      placeId:localStorage.getItem('resultsLocation')
+    };
+
+    search.getDetails(loc, function(place) {
+      $('#name').text(place.name);
+      $('#address').text(place.formatted_address);
+      $('#phone').text(place.international_phone_number);
+      $('#rating').text(place.rating);
+      map.setCenter(place.geometry.location);
+      Marker(place.geometry.location, place.name, openingHours(place) );
+    });
+    google.maps.event.trigger(map, 'resize');
+  });
 
   function Marker (loc, name, desc) {
     var marker = new google.maps.Marker({
@@ -33,18 +50,5 @@ $(function(){
     }
     return text;
   }
-
-  var loc = {
-    placeId:localStorage.getItem('resultsLocation')
-  };
-
-  search.getDetails(loc, function(place) {
-    $('#name').text(place.name);
-    $('#address').text(place.formatted_address);
-    $('#phone').text(place.international_phone_number);
-    $('#rating').text(place.rating);
-    map.setCenter(place.geometry.location);
-    Marker(place.geometry.location, place.name, openingHours(place) );
-  });
 
 });
