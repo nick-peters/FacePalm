@@ -7,6 +7,13 @@ form {
   margin-bottom: 20px;
 }
 
+header {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 12.5%;
+}
+
 .center {
   text-align: center;
 }
@@ -23,42 +30,45 @@ nav {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-  nav>ul>li>a:hover {
-    color: red;
+  .navbar-nav>li>a {
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: bold;
   }
-
+  .navbar-nav>li>a:hover:hover {
+      color: #fff;
+      font-weight: bold;
+      background-color: black;
+    }
 
 ul#voted {
   list-style-type: none;
   text-align: center;
   margin-right: 20%;
 }
-
-.highlight {
-  color: #337ab7;
-  text-decoration: line-through;
-  font-weight: 400;
-  font-size: 20px;
-}
-
-header {
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  margin-right: 12.5%;
-}
-
-
-
-input[type="radio"]:checked {
-  background-color: red;
-}
-
-
   #alreadyVotedHeader {
     text-align: center;
     margin-right: 0;
     font-size: 24px;
+  }
+  .highlight {
+    color: #337ab7;
+    text-decoration: line-through;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+span.input-group-addon {
+  color: darkgreen;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 3px;
+  line-height: 1.5em;
+}
+  .radioBullet {
+    width: 30px;
+    background: url('ninja.png') no-repeat fixed;
+    background-size: contain;
   }
 
 /**********************************************************
