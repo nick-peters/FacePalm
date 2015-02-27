@@ -11,7 +11,7 @@ header{
 }
 #finalWords {
   margin: 20px 20px 50px 20px;
-  margin-left: 20px;
+  width: 90%;
   text-align: justify;
 }
 #finalHead{
@@ -20,6 +20,7 @@ header{
 
 footer{
   text-align: center;
+  width: 100%;
 }
 nav{
   padding-top: 20px;
@@ -86,6 +87,16 @@ li{
 .nav>li{
   display:inline-block;
 }
+    .navbar-nav>li>a {
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  .navbar-nav>li>a:hover:hover {
+      color: #fff;
+      font-weight: bold;
+      background-color: black;
+    }
 
 @media screen and (min-width:760px){
   header {

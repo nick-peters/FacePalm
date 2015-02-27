@@ -39,7 +39,7 @@
           <form>
             <div class="row">
               <div class="col-md-6">
-                <label>What is your name?</label>
+                <label class="formLabel">What is your name?</label>
                 <select id="nameChoice">
                   <option value="" disabled selected>--Please Select--</option>
 <!--              These are being pulled in from Local Storage
@@ -51,7 +51,7 @@
               </div>
 
               <div class="col-md-6">
-                <label>What sounds good?</label>
+                <label class="formLabel">What sounds good?</label>
                 <select id="cuisineChoice">
                   <option value="" disabled selected>--Please Select--</option>
                   <option value = "mexican">Mexican</option>
@@ -70,14 +70,14 @@
 
             <div class="row">
               <div class="col-md-12">
-                <label>Where are you now?</label>
-                <input id="userLocation" type="text" placeholder="920 SW Third Avenue 2nd Floor Portland, OR 97204"></input>
+                <label class="formLabel">Where are you now?</label>
+                <input id="userLocation" type="text" placeholder="920 SW 3rd Ave 2nd Floor Portland, OR 97204"></input>
               </div>
             </div>
 
             <div class="row">
               <div id="costChoice" class="col-md-12">
-                <label>Pick Your Price:</label>
+                <label class="formLabel">Pick Your Price:</label>
                   <span class="input-group-addon">
                     <input class="radioBullet" type="radio" name="price" value="$" data-cost="1">$</input>
                   </span>
@@ -115,11 +115,11 @@
     </div>
 
     <!-- Footer -->
-    <selection class="col-xs-12 col-md-12">
-      <nav class="navbar navbar-default navbar-fixed-bottom">
-        <footer>Copyright © 2015 FacePalm, LLC. All Rights Reserved.</footer>
-      </nav>
-    </selection>
+      <div class="col-xs-12 col-md-12">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+          <footer>Copyright &copy; 2015 FacePalm, LLC. All Rights Reserved.</footer>
+        </nav>
+      </div>
     <div id="map-search"></div>
   </body>
 <html>
