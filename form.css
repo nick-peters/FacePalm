@@ -19,30 +19,47 @@ form {
   width: 50%;
 }
 
-ul#voted {
+nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+  nav>ul>li>a:hover {
+    color: red;
+  }
 
+
+ul#voted {
+  list-style-type: none;
+  text-align: center;
+  margin-right: 20%;
 }
 
 .highlight {
   color: #337ab7;
   text-decoration: line-through;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 header {
   font-size: 32px;
   font-weight: bold;
-  text-align: right;
-  margin-right: 10%;
-}
-
-nav {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  text-align: center;
+  margin-right: 12.5%;
 }
 
 
+
+input[type="radio"]:checked {
+  background-color: red;
+}
+
+
+  #alreadyVotedHeader {
+    text-align: center;
+    margin-right: 0;
+    font-size: 24px;
+  }
 
 /**********************************************************
 MEDIA QUERIES
@@ -61,4 +78,17 @@ MEDIA QUERIES
   header {
     text-align: center;
   }
+
+};
+
+
+@media screen and (max-width: 991px) {
+
+  .well {
+    margin-top: 20px;
   }
+
+};
+
+
+
