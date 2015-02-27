@@ -11,12 +11,16 @@ form {
   label {
     margin: 3px 0;
   }
-header {
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  margin-right: 12.5%;
-}
+    .formLabel {
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+  header {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 12.5%;
+  }
 
 #placeVote {
   margin: 10px 0;
@@ -35,6 +39,11 @@ header {
 
 .row {
   margin: 10px 5px;
+}
+
+#nameChoice , #cuisineChoice {
+  width: 40%;
+  text-align: center;
 }
 
 #userLocation {
