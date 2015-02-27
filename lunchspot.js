@@ -16,10 +16,12 @@ $(function(){
     };
 
     search.getDetails(loc, function(place) {
+      console.log(place);
       $('#name').text(place.name);
       $('#address').text(place.formatted_address);
       $('#phone').text(place.international_phone_number);
       $('#rating').text(place.rating);
+      $('#website').append("<a href="+"'"+place.website+"'>"+place.website+"</a>");
       map.setCenter(place.geometry.location);
       Marker(place.geometry.location, place.name, openingHours(place) );
     });
