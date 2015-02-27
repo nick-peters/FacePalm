@@ -6,8 +6,7 @@ header{
 }
 
 #container {
-  /*margin: 80px auto 0 auto;*/
-  margin:80px auto auto auto;
+  margin:110px auto auto auto;
   text-align: center;
 }
 #finalWords {
@@ -16,14 +15,16 @@ header{
   text-align: justify;
 }
 #finalHead{
-  /*text-align: center;*/
   font-weight: bold;
 }
 
 footer{
   text-align: center;
 }
-
+nav{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
 .circle-nick {
   width:150px;
