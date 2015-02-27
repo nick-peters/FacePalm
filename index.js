@@ -11,12 +11,12 @@ $(function() {
     $('#createGroupButton').hide();
     $('#newGroup')
       .append($('<div>').attr('class', 'form-group')
-        .append($('<label>').text("Enter New Group Name:").attr('class','col-sm-6 control-label'))
-        .append($('<div>').attr('class', 'col-sm-1')
+        .append($('<label>').text("Enter New Group Name:").attr('class','col-sm-5 control-label'))
+        .append($('<div>').attr('class', 'col-sm-2')
           .append($('<input>').attr('type', 'text').attr('id', 'enterNewGroup').attr('class', 'form-control'))))
       .append($('<div>').attr('class', 'form-group')
-        .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-6 control-label'))
-        .append($('<div>').attr('class', 'col-sm-1')
+        .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-5 control-label'))
+        .append($('<div>').attr('class', 'col-sm-2')
           .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers form-control'))))
       .append($('<div>').attr('class', 'form-group').attr('id', 'buttonGroup')
         .append($('<div>').attr('class', 'col-sm-offset-2 col-sm-8')
@@ -27,8 +27,8 @@ $(function() {
         e.preventDefault();
         $('#buttonGroup')
           .before($('<div>').attr('class', 'form-group')
-            .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-6 control-label'))
-            .append($('<div>').attr('class', 'col-sm-1')
+            .append($('<label>').text("Enter New Member Name:").attr('class','col-sm-5 control-label'))
+            .append($('<div>').attr('class', 'col-sm-2')
               .append($('<input>').attr('type', 'text').attr('class', 'enterNewMembers form-control'))))
       });
 
