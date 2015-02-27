@@ -16,7 +16,6 @@ $(function(){
     };
 
     search.getDetails(loc, function(place) {
-      console.log(place);
       $('#name').text(place.name);
       $('#address').text(place.formatted_address);
       $('#phone').text(place.international_phone_number);
