@@ -20,7 +20,7 @@ $(function(){
       $('#address').text(place.formatted_address);
       $('#phone').text(place.international_phone_number);
       $('#rating').text(place.rating);
-      $('#website').append('<a href='+ '"' + place.website + '">' + place.website + '</a>');
+      website(place);
       map.setCenter(place.geometry.location);
       Marker(place.geometry.location, place.name, openingHours(place) );
     });
@@ -45,10 +45,23 @@ $(function(){
   function openingHours(place) {
     var text = "";
     this.place = place;
-    for( i = 0; i < place.opening_hours.weekday_text.length; i++ ) {
-      text += place.opening_hours.weekday_text[i] + "\n" + "</br>";
+    if(place.opening_hours) {
+      for( i = 0; i < place.opening_hours.weekday_text.length; i++ ) {
+        text += place.opening_hours.weekday_text[i] + "\n" + "</br>";
+      }
+      return text;
+    } else {
+      return 'No Hours Available';
     }
-    return text;
+  }
+
+  function website (place) {
+    this.place = place;
+    if (place.website) {
+      $('#website').append('<a href='+ '"' + place.website + '">' + place.website + '</a>');
+    } else {
+      $('#website').text('No Web Presence');
+    }
   }
 
 });
