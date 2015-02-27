@@ -204,6 +204,9 @@ $(function() {
         });
 
       selectedGroup = getSelectedGroup();
+
+      enableSubmitCheck();
+
       for (var i = 0; i < selectedGroup.members.length; i++ ) {
         $('#nameChoice').append( $('<option>')
           .text(selectedGroup.members[i].memberName)
